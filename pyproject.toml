@@ -1,7 +1,7 @@
 [project]
 name = "nearby-earthquakes"
 license = "MIT"
-readme = "RUN.md"
+readme = "README.md"
 python = "3.9"
 
 [tool.isort]

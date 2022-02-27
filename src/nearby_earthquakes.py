@@ -30,7 +30,7 @@ TODO:
 
 from src.arguments_parser import get_city_coordinates
 from src.business_logic import get_closest_earthquakes
-from src.events import find_earthquakes
+from src.earthquakes_getter import find_earthquakes
 from src.formatted_output import print_ten_closest_earthquakes
 
 if __name__ == "__main__":

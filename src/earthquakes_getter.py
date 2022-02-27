@@ -25,6 +25,8 @@ from requests.exceptions import Timeout
 from retry import retry
 
 from src.models import Earthquake
+from src.settings import LAST_MONTH_EVENTS_URL
+from src.settings import REQUESTS_TIMEOUT
 
 
 def find_earthquakes() -> List[Earthquake]:
@@ -36,11 +38,9 @@ def find_earthquakes() -> List[Earthquake]:
 
 @retry((HTTPError, Timeout), tries=5, delay=4, backoff=2)
 def get_earthquakes() -> Dict[str, Any]:
-    url = (
-        "https://earthquake.usgs.gov/earthquakes"
-        "/feed/v1.0/summary/all_month.geojson"
+    response = requests.get(
+        url=LAST_MONTH_EVENTS_URL, timeout=REQUESTS_TIMEOUT
     )
-    response = requests.get(url=url, timeout=20)
     response.raise_for_status()
     return response.json()
 

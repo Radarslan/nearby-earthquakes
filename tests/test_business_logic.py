@@ -43,19 +43,22 @@ def test_get_ten_closest_earthquakes(
     earthquake: Callable,
     earthquakes_with_distance: List[Earthquake],
 ) -> None:
+    duplicates = 3
     earth_quake = earthquake()
     earth_quake.distance = 1
-    earthquakes = [earth_quake] * 3 + earthquakes_with_distance
+    earthquakes = [earth_quake] * duplicates + earthquakes_with_distance
 
     earthquakes = get_ten_closest_earthquakes(earthquakes)
 
     assert earthquakes.count(earth_quake) == 1
     assert len(earthquakes) == NUMBER_OF_EVENTS
 
-    # if the list of earthquakes is less than 10
+    # if the list of earthquakes is less than NUMBER_OF_EVENTS
     # it returns less than NUMBER_OF_EVENTS events
     another_number_of_events = 7
-    earthquakes = [earth_quake] * 3 + earthquakes[:another_number_of_events]
+    earthquakes = [earth_quake] * duplicates + earthquakes[
+        :another_number_of_events
+    ]
 
     earthquakes = get_ten_closest_earthquakes(earthquakes)
 
